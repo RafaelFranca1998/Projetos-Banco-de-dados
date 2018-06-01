@@ -1,7 +1,7 @@
 package br.model;
 
 public class ProjetoAluno {
-	private int id, idade;
+	private int id, idade,idadedia,idademes,idadeano;
 	private String nome,sobrenome, turno, curso;
 
 	public String getCurso() {
@@ -51,4 +51,29 @@ public class ProjetoAluno {
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
 	}
+
+	public int getIdadedia() {
+		return idadedia;
+	}
+
+	public void setIdadedia(int idadedia) {
+		this.idadedia = idadedia;
+	}
+
+	public int getIdademes() {
+		return idademes;
+	}
+
+	public void setIdademes(int idademes) {
+		this.idademes = idademes;
+	}
+
+	public int getIdadeano() {
+		return idadeano;
+	}
+
+	public void setIdadeano(int idadeano) {
+		this.idadeano = idadeano;
+	}
+	
 }

@@ -5,6 +5,10 @@ public class BancodeDados {
 	private String nome;
 	private int idade;
 	
+	/*
+	 * Deprecated Programa aluno 1.0
+	 * */
+	
 	public int getId() {
 		return id;
 	}

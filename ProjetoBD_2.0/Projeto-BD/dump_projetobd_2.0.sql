@@ -16,31 +16,58 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `pessoas`
+-- Table structure for table `alunos`
 --
 
-DROP TABLE IF EXISTS `pessoas`;
+DROP TABLE IF EXISTS `alunos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pessoas` (
+CREATE TABLE `alunos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) DEFAULT NULL,
   `sobrenome` varchar(45) DEFAULT NULL,
   `idade` int(11) DEFAULT NULL,
+  `idadedia` int(11) DEFAULT NULL,
+  `idademes` int(11) DEFAULT NULL,
+  `idadeano` int(11) DEFAULT NULL,
   `curso` varchar(45) DEFAULT NULL,
   `turno` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `pessoas`
+-- Dumping data for table `alunos`
 --
 
-LOCK TABLES `pessoas` WRITE;
-/*!40000 ALTER TABLE `pessoas` DISABLE KEYS */;
-INSERT INTO `pessoas` VALUES (17,'Rafael','Cruz',19,'Análise de Sistemas','Noturno'),(21,'Igor','Silva',20,'Educação Fisica','Vespertino'),(24,'Igor','Nery',21,'Redes','Vespertino');
-/*!40000 ALTER TABLE `pessoas` ENABLE KEYS */;
+LOCK TABLES `alunos` WRITE;
+/*!40000 ALTER TABLE `alunos` DISABLE KEYS */;
+INSERT INTO `alunos` VALUES (17,'Rafael','Cruz',19,NULL,NULL,NULL,'Análise de Sistemas','Noturno'),(28,'Rodrigo','Franca',16,NULL,NULL,NULL,'Administração','Matutino'),(32,'Adriano','Santos',22,0,0,0,'Fonoaudiologia','Noturno'),(40,'sasas','asasas',-18161670,NULL,NULL,NULL,'Administração','Matutino'),(42,'sdsdsdsd','sdsd',-18161670,NULL,NULL,NULL,'Administração','Matutino'),(43,'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa','aaaaaaaaaaaaaaaaaaaaaaaaaaa',1,0,0,0,'Administração','Matutino'),(44,'assas','sasas',-18161670,NULL,NULL,NULL,'Administração','Matutino'),(46,'saas','asassa',330,NULL,NULL,NULL,'Administração','Matutino'),(47,'asa','sasa',89521,NULL,NULL,NULL,'Administração','Matutino'),(48,'sasa','sasasa',0,NULL,NULL,NULL,'Administração','Matutino'),(54,'André','Souza',23,NULL,NULL,NULL,'Administração','Vespertino'),(63,'sasa','asasa',0,NULL,NULL,NULL,'Administração','Matutino');
+/*!40000 ALTER TABLE `alunos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cursos`
+--
+
+DROP TABLE IF EXISTS `cursos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cursos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `curso` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cursos`
+--
+
+LOCK TABLES `cursos` WRITE;
+/*!40000 ALTER TABLE `cursos` DISABLE KEYS */;
+INSERT INTO `cursos` VALUES (2,'Analise de Sistemas'),(3,'Administração'),(4,'Redes'),(5,'Fisioterapia'),(6,'Direito'),(7,'Assistente Social'),(8,'Fonoaudiologia'),(9,'Biblioteconomia');
+/*!40000 ALTER TABLE `cursos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -60,4 +87,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-22 22:48:21
+-- Dump completed on 2018-06-01 15:32:29

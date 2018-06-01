@@ -2,9 +2,11 @@ package br.main.window;
 
 import java.awt.Choice;
 import java.awt.Color;
-import java.awt.Window.Type;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,71 +14,81 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import br.DAO.Datasource;
-import br.DAO.ProgramDAO;
+import br.DAO.ProgramDAOAluno;
 import br.main.ProgramaAlunoDB;
 import br.model.Cursos;
 import br.model.ProjetoAluno;
 
 public class EditWindow {
-	private JFrame frameEdit = new JFrame("Editar");
 
-	private JButton btnConfirmar = new JButton("Confirmar");
-	private JButton btnCancelar = new JButton("Cancelar");
-
-	private JLabel lblNomeEdit = new JLabel("Nome");
-	private JLabel lblIdadeEdit = new JLabel("Idade");
-	private JLabel lblCursoEdit = new JLabel("Curso");
-	private JLabel lblTurnoEdit = new JLabel("Turno");
-
-	private JTextField textFieldNomeEdit = new JTextField();
-
-	private ProgramaAlunoDB gr = new ProgramaAlunoDB();
-	private Choice choiceIdadeEdit = new Choice();
-	private Choice choiceCursoEdit = new Choice();
-	private Choice choiceTurnoEdit = new Choice();
-
-	private ProjetoAluno BD = new ProjetoAluno();
-	private Datasource ds;
-	private ProgramDAO dao;
-
-	private int identificação;
-	private final JLabel lblSobrenome = new JLabel("Sobrenome");
-	private final JTextField textFieldSobrenomeEdit = new JTextField();
-	private final JLabel lblPreenchaTodosOs = new JLabel("Preencha Todos os Campos");
-	static EditWindow instance;
+	static JFrame frameEdit = new JFrame("Editar");
+	ProjetoAluno BD = new ProjetoAluno();
+	Datasource ds;
+	ProgramDAOAluno dao;
+	int identificação;
+	Choice choiceIdadeDia = new Choice();
+	Choice choiceCursoEdit = new Choice();
+	Choice choiceTurnoEdit = new Choice();
+	Choice choiceIdadeMes = new Choice();
+	Choice choiceIdadeAno = new Choice();
+	JTextField textFieldNomeEdit = new JTextField();
 
 	public EditWindow() {
-		
+
 	}
+
+	public static void initalize(int id) {
+		EditWindow e = new EditWindow();
+		e.abrir(id);
+	}
+
 	/**
 	 * @wbp.parser.entryPoint
 	 */
 	public void abrir(int id) {
-		gr.enableWindow(false);
 		identificação = id;
-		
-		textFieldSobrenomeEdit.setBounds(94, 73, 147, 20);
+
+		JButton btnConfirmar = new JButton("Confirmar");
+		JButton btnCancelar = new JButton("Cancelar");
+
+		JLabel lblNomeEdit = new JLabel("Nome");
+		JLabel lblIdadeEdit = new JLabel("Idade");
+		JLabel lblCursoEdit = new JLabel("Curso");
+		JLabel lblTurnoEdit = new JLabel("Turno");
+		JLabel lblIdadeAno = new JLabel("Ano");
+		JLabel lblIdadeDia = new JLabel("Dia");
+
+		final JLabel lblSobrenome = new JLabel("Sobrenome");
+		final JTextField textFieldSobrenomeEdit = new JTextField();
+		final JLabel lblPreenchaTodosOs = new JLabel("Preencha Todos os Campos");
+
+		ProgramaAlunoDB.enableWindow(false);
+
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Dimension d = tk.getScreenSize();
+		frameEdit.setBounds((d.width/2)-315,(d.height/2)-150, 330, 300);
+
+		updateChoiceIdade();
+		textFieldSobrenomeEdit.setBounds(95, 74, 190, 20);
 		textFieldSobrenomeEdit.setColumns(10);
-		choiceTurnoEdit.setSize(146, 20);
-		choiceTurnoEdit.setLocation(95, 155);
-		choiceCursoEdit.setSize(146, 20);
-		choiceCursoEdit.setLocation(95, 129);
-		choiceIdadeEdit.setBounds(118, 103, 89, 20);
-		lblIdadeEdit.setBounds(24, 104, 77, 14);
-		lblNomeEdit.setBounds(24, 49, 77, 14);
+		choiceTurnoEdit.setSize(190, 20);
+		choiceTurnoEdit.setLocation(95, 165);
+		choiceCursoEdit.setSize(190, 20);
+		choiceCursoEdit.setLocation(95, 140);
+		choiceIdadeDia.setBounds(95, 115, 60, 20);
+		lblIdadeEdit.setBounds(24, 115, 77, 14);
+		lblNomeEdit.setBounds(24, 46, 77, 14);
 		btnCancelar.setBounds(192, 221, 89, 23);
 		btnConfirmar.setBounds(44, 221, 105, 23);
-		textFieldNomeEdit.setBounds(95, 46, 146, 20);
+		textFieldNomeEdit.setBounds(95, 46, 190, 20);
 		textFieldNomeEdit.setColumns(10);
-		lblCursoEdit.setBounds(24, 129, 46, 14);
-		lblTurnoEdit.setBounds(24, 155, 46, 14);
-		frameEdit.setBounds(100, 100, 326, 300);
+		lblCursoEdit.setBounds(24, 140, 46, 14);
+		lblTurnoEdit.setBounds(24, 165, 46, 14);
 
-		choiceIdadeEdit.add("");
+		choiceIdadeDia.add("");
 		for (int i = 0; i < 110; i++) {
-			choiceIdadeEdit.add(String.valueOf(i + 1));
+			choiceIdadeDia.add(String.valueOf(i + 1));
 		}
-
 
 		choiceTurnoEdit.add("Matutino");
 		choiceTurnoEdit.add("Vespertino");
@@ -90,30 +102,43 @@ public class EditWindow {
 		frameEdit.getContentPane().add(btnConfirmar);
 		frameEdit.getContentPane().add(textFieldNomeEdit);
 		frameEdit.getContentPane().add(lblNomeEdit);
-		frameEdit.getContentPane().add(choiceIdadeEdit);
+		frameEdit.getContentPane().add(choiceIdadeDia);
 		frameEdit.getContentPane().add(choiceCursoEdit);
 		frameEdit.getContentPane().add(choiceTurnoEdit);
 		frameEdit.getContentPane().add(lblIdadeEdit);
 		frameEdit.getContentPane().add(btnCancelar);
-		frameEdit.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		frameEdit.setType(Type.POPUP);
+		frameEdit.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frameEdit.getContentPane().setLayout(null);
-		lblSobrenome.setBounds(24, 74, 62, 14);
-
 		frameEdit.getContentPane().add(lblSobrenome);
-
 		frameEdit.getContentPane().add(textFieldSobrenomeEdit);
-		lblPreenchaTodosOs.setForeground(Color.RED);
-		lblPreenchaTodosOs.setBounds(24, 24, 155, 14);
-		lblPreenchaTodosOs.setVisible(false);
-		
 		frameEdit.getContentPane().add(lblPreenchaTodosOs);
 		frameEdit.setResizable(false);
 		frameEdit.setVisible(true);
 
+		lblSobrenome.setBounds(24, 74, 62, 14);
+		lblPreenchaTodosOs.setForeground(Color.RED);
+		lblPreenchaTodosOs.setBounds(24, 24, 194, 14);
+
+		choiceIdadeMes.setBounds(161, 115, 60, 20);
+		frameEdit.getContentPane().add(choiceIdadeMes);
+
+		choiceIdadeAno.setBounds(225, 115, 60, 20);
+		frameEdit.getContentPane().add(choiceIdadeAno);
+
+		lblIdadeAno.setBounds(225, 100, 46, 14);
+		frameEdit.getContentPane().add(lblIdadeAno);
+
+		lblIdadeDia.setBounds(95, 100, 46, 14);
+		frameEdit.getContentPane().add(lblIdadeDia);
+
+		JLabel lblMs = new JLabel("M\u00EAs");
+		lblMs.setBounds(161, 100, 46, 14);
+		frameEdit.getContentPane().add(lblMs);
+		lblPreenchaTodosOs.setVisible(false);
+
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				gr.enableWindow(true);
+				ProgramaAlunoDB.enableWindow(true);
 				close();
 			}
 		});
@@ -121,29 +146,48 @@ public class EditWindow {
 			public void actionPerformed(ActionEvent e) {
 
 				ds = new Datasource();
-				dao = new ProgramDAO(ds);
+				dao = new ProgramDAOAluno(ds);
 				BD.setId(identificação);
 				try {
 					BD.setNome(textFieldNomeEdit.getText());
 					BD.setSobrenome(textFieldSobrenomeEdit.getText());
-					BD.setIdade(Integer.parseInt(choiceIdadeEdit.getSelectedItem()));
+					BD.setIdade(Integer.parseInt(choiceIdadeDia.getSelectedItem()));
 					BD.setTurno(choiceTurnoEdit.getSelectedItem());
 					BD.setCurso(choiceCursoEdit.getSelectedItem());
 					dao.Update(BD);
 					lblPreenchaTodosOs.setVisible(false);
-					gr.enableWindow(true);
-					gr.updateTable();
-					close();
-					
+
 				} catch (Exception e2) {
 					lblPreenchaTodosOs.setVisible(true);
-					
+
+				} finally {
+					textFieldNomeEdit.setText("");
+					textFieldSobrenomeEdit.setText("");
+					ProgramaAlunoDB.enableWindow(true);
+					close();
 				}
 			}
 		});
 	}
 
-	private void close() {
+	void close() {
 		frameEdit.setVisible(false);
+	}
+
+	void updateChoiceIdade() {
+		choiceIdadeDia.removeAll();
+		choiceIdadeMes.removeAll();
+		choiceIdadeAno.removeAll();
+		for (int i = 0; i < 30; i++) {
+			choiceIdadeDia.add(String.valueOf(i + 1));
+		}
+		for (int i = 0; i < 12; i++) {
+			choiceIdadeMes.add(String.valueOf(i + 1));
+		}
+		Calendar cal = Calendar.getInstance();
+		int anoatual = cal.get(Calendar.YEAR);
+		for (int i = anoatual; i > 1900; i--) {
+			choiceIdadeAno.add(String.valueOf(i));
+		}
 	}
 }
