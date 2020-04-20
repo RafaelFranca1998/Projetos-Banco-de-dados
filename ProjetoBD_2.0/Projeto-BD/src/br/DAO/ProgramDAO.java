@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import br.model.ProjetoAluno;
+import br.model.Aluno;
 
 
 
@@ -19,8 +19,8 @@ public class ProgramDAO {
 
 	// -------------------------------------------------------------------
 	/**
-	 * Cria uma nova instância da Classe BibliotecaDao.
-	 * @param datasource os dados da conexão.
+	 * Cria uma nova instï¿½ncia da Classe BibliotecaDao.
+	 * @param datasource os dados da conexï¿½o.
 	 */
 	public ProgramDAO(Datasource ds) {
 		this.dataSource = ds;
@@ -30,13 +30,13 @@ public class ProgramDAO {
 	 * Metodo que retorna um Arraylist contendo os dados da tabela no Banco de Dados.
 	 * @return Lista com ID, Nome, Tipo, endereco, arquivo e nome do arquivo.
 	 */
-	public ArrayList<ProjetoAluno> listAlunos() {
+	public ArrayList<Aluno> listAlunos() {
 		try {
 			PreparedStatement ps = dataSource.getConnection().prepareStatement("SELECT * FROM pessoas");
 			ResultSet rs = ps.executeQuery();
-			ArrayList<ProjetoAluno> Lista = new ArrayList<ProjetoAluno>();
+			ArrayList<Aluno> Lista = new ArrayList<Aluno>();
 			while (rs.next()) {
-				ProjetoAluno BD = new ProjetoAluno();
+				Aluno BD = new Aluno();
 				BD.setId(rs.getInt("id"));
 				BD.setNome(rs.getString("nome"));
 				BD.setSobrenome(rs.getString("sobrenome"));
@@ -57,14 +57,14 @@ public class ProgramDAO {
 	}
 	// -------------------------------------------------------------------
 	
-	public ArrayList<ProjetoAluno> shortByCurso(String curso) {
+	public ArrayList<Aluno> shortByCurso(String curso) {
 		try {
 			PreparedStatement ps = dataSource.getConnection().prepareStatement("SELECT * FROM pessoas WHERE curso = ?");
 			ps.setString(1, curso);
 			ResultSet rs = ps.executeQuery();
-			ArrayList<ProjetoAluno> list = new ArrayList<ProjetoAluno>();
+			ArrayList<Aluno> list = new ArrayList<Aluno>();
 			while (rs.next()) {
-				ProjetoAluno BD = new ProjetoAluno();
+				Aluno BD = new Aluno();
 				BD.setId(rs.getInt("id"));
 				BD.setNome(rs.getString("nome"));
 				BD.setSobrenome(rs.getString("sobrenome"));
@@ -111,14 +111,14 @@ public class ProgramDAO {
 		return null;
 	}
 	*/
-	public ArrayList<ProjetoAluno> shortByName(String name) {
+	public ArrayList<Aluno> shortByName(String name) {
 		try {
 			PreparedStatement ps = dataSource.getConnection().prepareStatement("SELECT * FROM pessoas WHERE nome = ?");
 			ps.setString(1, name);
 			ResultSet rs = ps.executeQuery();
-			ArrayList<ProjetoAluno> list = new ArrayList<ProjetoAluno>();
+			ArrayList<Aluno> list = new ArrayList<Aluno>();
 			while (rs.next()) {
-				ProjetoAluno BD = new ProjetoAluno();
+				Aluno BD = new Aluno();
 				BD.setId(rs.getInt("id"));
 				BD.setNome(rs.getString("nome"));
 				BD.setSobrenome(rs.getString("sobrenome"));
@@ -138,14 +138,14 @@ public class ProgramDAO {
 		return null;
 	}
 	
-	public ArrayList<ProjetoAluno> shortByTurno(String turno) {
+	public ArrayList<Aluno> shortByTurno(String turno) {
 		try {
 			PreparedStatement ps = dataSource.getConnection().prepareStatement("SELECT * FROM pessoas WHERE turno = ?");
 			ps.setString(1, turno);
 			ResultSet rs = ps.executeQuery();
-			ArrayList<ProjetoAluno> list = new ArrayList<ProjetoAluno>();
+			ArrayList<Aluno> list = new ArrayList<Aluno>();
 			while (rs.next()) {
-				ProjetoAluno BD = new ProjetoAluno();
+				Aluno BD = new Aluno();
 				BD.setId(rs.getInt("id"));
 				BD.setNome(rs.getString("nome"));
 				BD.setSobrenome(rs.getString("sobrenome"));
@@ -167,9 +167,9 @@ public class ProgramDAO {
 	
 	/**
 	 * Insere dados no banco de dados.
-	 * @param U os dados do usuário.
+	 * @param U os dados do usuï¿½rio.
 	 */
-	public void create(ProjetoAluno U) {
+	public void create(Aluno U) {
 		Connection con = dataSource.getConnection();
 		PreparedStatement stmp = null;
 		try {
@@ -195,7 +195,7 @@ public class ProgramDAO {
 		}
 	}
 	
-	public void Update(ProjetoAluno U) {
+	public void Update(Aluno U) {
 		Connection con = dataSource.getConnection();
 		PreparedStatement stmp = null;
 		try {
@@ -223,10 +223,10 @@ public class ProgramDAO {
 	}
 	// -------------------------------------------------------------------
 	/**
-	 * Deleta dados baseado no ID passado como parâmetro.
+	 * Deleta dados baseado no ID passado como parï¿½metro.
 	 * @param U ID a ser Deletado. 
 	 */
-	public void delete(ProjetoAluno U) {
+	public void delete(Aluno U) {
 		Connection con = dataSource.getConnection();
 		PreparedStatement stmp = null;
 		try {

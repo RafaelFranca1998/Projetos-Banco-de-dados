@@ -25,6 +25,7 @@ import java.awt.event.TextListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -38,6 +39,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
@@ -47,16 +49,14 @@ import br.DAO.Datasource;
 import br.DAO.ProgramDAOAluno;
 import br.DAO.ProgramDAOCursos;
 import br.curso.AlunosCurso;
-import br.curso.DisciplinasObrigatórias;
+import br.curso.DisciplinasObrigatorias;
 import br.curso.DisciplinasOptativas;
 import br.curso.SobreWindow;
 import br.main.window.EditWindow;
 import br.model.Cursos;
 import br.model.Idade;
 import br.model.NiveldeAcesso;
-import br.model.ProjetoAluno;
-import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
+import br.model.Aluno;
 
 public class ProgramaAlunoDB {
 	private static JFrame frmGerenciaDB = new JFrame();
@@ -114,7 +114,7 @@ public class ProgramaAlunoDB {
 
 	private static Datasource ds;
 	private static ProgramDAOAluno daoAluno;
-	private ProjetoAluno BDAlunos;
+	private Aluno BDAlunos;
 	private int id = -1;
 	private int idCurso = -1;
 	private boolean updated, clicked1, clicked2, clicked3, clicked4;
@@ -160,7 +160,7 @@ public class ProgramaAlunoDB {
 		daoAluno = new ProgramDAOAluno(ds);
 		DefaultTableModel modelo = (DefaultTableModel) tableResultado.getModel();
 		modelo.setNumRows(0);
-		for (ProjetoAluno BD2 : daoAluno.listAlunos()) {
+		for (Aluno BD2 : daoAluno.listAlunos()) {
 			modelo.addRow(new Object[] { BD2.getId(), BD2.getNome(), BD2.getSobrenome(), BD2.getIdade(), BD2.getCurso(),
 					BD2.getTurno() });
 		}
@@ -179,10 +179,10 @@ public class ProgramaAlunoDB {
 	public void updateByCurso(String curso) {
 		ds = new Datasource();
 		daoAluno = new ProgramDAOAluno(ds);
-		BDAlunos = new ProjetoAluno();
+		BDAlunos = new Aluno();
 		DefaultTableModel modelo = (DefaultTableModel) tableResultado.getModel();
 		modelo.setNumRows(0);
-		for (ProjetoAluno BD2 : daoAluno.shortByCurso(curso)) {
+		for (Aluno BD2 : daoAluno.shortByCurso(curso)) {
 			modelo.addRow(new Object[] { BD2.getId(), BD2.getNome(), BD2.getSobrenome(), BD2.getIdade(), BD2.getCurso(),
 					BD2.getTurno() });
 		}
@@ -211,11 +211,11 @@ public class ProgramaAlunoDB {
 	private void updateByName(String name) {
 		ds = new Datasource();
 		daoAluno = new ProgramDAOAluno(ds);
-		BDAlunos = new ProjetoAluno();
+		BDAlunos = new Aluno();
 		DefaultTableModel modelo = (DefaultTableModel) tableResultado.getModel();
 		modelo.setNumRows(0);
 
-		for (ProjetoAluno BD2 : daoAluno.shortByName(name)) {
+		for (Aluno BD2 : daoAluno.shortByName(name)) {
 			modelo.addRow(new Object[] { BD2.getId(), BD2.getNome(), BD2.getSobrenome(), BD2.getIdade(), BD2.getCurso(),
 					BD2.getTurno() });
 		}
@@ -282,7 +282,7 @@ public class ProgramaAlunoDB {
 		frmGerenciaDB.setBackground(Color.BLACK);
 		frmGerenciaDB.setIconImage(
 				Toolkit.getDefaultToolkit().getImage("C:\\Users\\Rafael_Cruz\\Desktop\\Programa\\download.png"));
-		BDAlunos = new ProjetoAluno();
+		BDAlunos = new Aluno();
 		updateChoiceIdade();
 
 		panelInserir.setVisible(false);
@@ -360,10 +360,10 @@ public class ProgramaAlunoDB {
 		});
 		popupMenuCursos.add(menuItem);
 
-		JMenuItem menuItem_1 = new JMenuItem("Ver Disciplinas Obrigatórias");
+		JMenuItem menuItem_1 = new JMenuItem("Ver Disciplinas Obrigatï¿½rias");
 		menuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DisciplinasObrigatórias.run();
+				DisciplinasObrigatorias.run();
 			}
 		});
 		popupMenuCursos.add(menuItem_1);
@@ -520,7 +520,7 @@ public class ProgramaAlunoDB {
 					daoAluno = new ProgramDAOAluno(ds);
 					Object coluna = tableResultado.getValueAt(tableResultado.getSelectedRow(), 0);
 					if (JOptionPane.showConfirmDialog(tableResultado,
-							"Esta Ação não poderá ser desfeita! \n Deseja remover o Livro da Lista?", "Atenção!",
+							"Esta Aï¿½ï¿½o nï¿½o poderï¿½ ser desfeita! \n Deseja remover o Livro da Lista?", "Atenï¿½ï¿½o!",
 							JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
 						int id = Integer.parseInt(coluna.toString());
@@ -564,7 +564,7 @@ public class ProgramaAlunoDB {
 					Object coluna = tableResultado.getValueAt(tableResultado.getSelectedRow(), 0);
 					JOptionPane pane = new JOptionPane();
 					if (pane.showConfirmDialog(tableResultado,
-							"Esta Ação não poderá ser desfeita! \n Deseja remover o Livro da Lista?", "Atenção!",
+							"Esta Aï¿½ï¿½o nï¿½o poderï¿½ ser desfeita! \n Deseja remover o Livro da Lista?", "Atenï¿½ï¿½o!",
 							pane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 
 						int id = Integer.parseInt(coluna.toString());

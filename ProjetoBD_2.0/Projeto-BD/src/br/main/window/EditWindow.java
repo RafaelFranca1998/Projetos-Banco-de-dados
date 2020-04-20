@@ -17,15 +17,15 @@ import br.DAO.Datasource;
 import br.DAO.ProgramDAOAluno;
 import br.main.ProgramaAlunoDB;
 import br.model.Cursos;
-import br.model.ProjetoAluno;
+import br.model.Aluno;
 
 public class EditWindow {
 
 	static JFrame frameEdit = new JFrame("Editar");
-	ProjetoAluno BD = new ProjetoAluno();
+	Aluno BD = new Aluno();
 	Datasource ds;
 	ProgramDAOAluno dao;
-	int identificação;
+	int identificacao;
 	Choice choiceIdadeDia = new Choice();
 	Choice choiceCursoEdit = new Choice();
 	Choice choiceTurnoEdit = new Choice();
@@ -46,7 +46,7 @@ public class EditWindow {
 	 * @wbp.parser.entryPoint
 	 */
 	public void abrir(int id) {
-		identificação = id;
+		identificacao = id;
 
 		JButton btnConfirmar = new JButton("Confirmar");
 		JButton btnCancelar = new JButton("Cancelar");
@@ -147,7 +147,7 @@ public class EditWindow {
 
 				ds = new Datasource();
 				dao = new ProgramDAOAluno(ds);
-				BD.setId(identificação);
+				BD.setId(identificacao);
 				try {
 					BD.setNome(textFieldNomeEdit.getText());
 					BD.setSobrenome(textFieldSobrenomeEdit.getText());

@@ -10,7 +10,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
-public class DisciplinasObrigatórias {
+public class DisciplinasObrigatorias {
 
 	JTable table = new JTable();
 	private JFrame frame;
@@ -21,7 +21,7 @@ public class DisciplinasObrigatórias {
 
 	public static void run() {
 		try {
-			DisciplinasObrigatórias window = new DisciplinasObrigatórias();
+			DisciplinasObrigatorias window = new DisciplinasObrigatorias();
 			window.frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -31,7 +31,7 @@ public class DisciplinasObrigatórias {
 	/**
 	 * Create the application.
 	 */
-	public DisciplinasObrigatórias() {
+	public DisciplinasObrigatorias() {
 		initialize();
 	}
 
@@ -55,7 +55,7 @@ public class DisciplinasObrigatórias {
 		table.setBounds(0, 0, 439, 87);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {},
-				new String[] { "ID", "Disciplina Obrigatória" }) {
+				new String[] { "ID", "Disciplina Obrigatoria" }) {
 			private static final long serialVersionUID = 1L;
 			boolean[] canEdit = new boolean[] { false, false };
 			public boolean isCellEditable(int rowIndex, int columnIndex) {

@@ -1,7 +1,12 @@
 package br.model;
 
-public class ProjetoAluno {
-	private int id, idade,idadedia,idademes,idadeano;
+public class Aluno {
+	private Integer id;
+	private Integer idade;
+	private Integer idadedia;
+	private Integer idademes;
+	private Integer idadeano;
+	
 	private String nome,sobrenome, turno, curso;
 
 	public String getCurso() {
